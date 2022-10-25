@@ -1,0 +1,25 @@
+{
+  "name": "setel-assingment",
+  "version": "1.0.0",
+  "description": "Sample projects to demonstrate microservices, restful web api as well as ui. The system consists of 3 following projects: - Order Microservices - Payment Microservices - Order Web",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\"",
+    "prepare": "husky install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sotatek-ThanhPham5/setel-assingment.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Sotatek-ThanhPham5/setel-assingment/issues"
+  },
+  "homepage": "https://github.com/Sotatek-ThanhPham5/setel-assingment#readme",
+  "devDependencies": {
+    "lint-staged": "^13.0.3",
+    "husky": "^8.0.0"
+  }
+}
