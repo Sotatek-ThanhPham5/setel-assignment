@@ -1,9 +1,15 @@
 import { Button, message, Space, Table, Tag } from "antd";
 import React, { useEffect, useState } from "react";
+import "../styles/order.css";
 import { useDispatch } from "react-redux";
 import { useAppSelector } from "../../../app/hooks";
-import { OrderStatus } from "../constant/order.constant";
-import { getOrderList, cancel, getOrderDetail } from "../service/orderApi";
+import { ICreateOrder, OrderStatus } from "../constant/order.constant";
+import {
+  getOrderList,
+  cancel,
+  getOrderDetail,
+  createOrder,
+} from "../service/orderApi";
 import {
   selectedOrderList,
   setOrderDetail,
@@ -53,6 +59,20 @@ export function Order() {
     dispatch(setOrderDetail(response.data));
     setShowModalDetail(true);
   };
+
+  const onFinish = async (values: ICreateOrder) => {
+    const order = {
+      name: values.name,
+      amount: +values.amount,
+    };
+    const response: any = await createOrder(order);
+    if (response?.success) {
+      message.success("Create new order successful!");
+      await fetchOrderList();
+      setShowModalCreate(false);
+    }
+  };
+
   const handleStatus = (status: string) => {
     switch (status) {
       case OrderStatus.Canceled:
@@ -65,6 +85,7 @@ export function Order() {
         return "blue";
     }
   };
+
   const columns: any = [
     {
       title: "Name",
@@ -108,7 +129,7 @@ export function Order() {
     },
   ];
   return (
-    <div>
+    <div className="order-page">
       <h1>Order Management</h1>
 
       <Button
@@ -133,6 +154,7 @@ export function Order() {
       <ModalCreate
         isShowModalCreate={isShowModalCreate}
         handleCancelModalCreate={() => handleCancelModalCreate()}
+        onFinish={(order) => onFinish(order)}
       />
     </div>
   );

@@ -5,24 +5,11 @@ import { createOrder } from "../service/orderApi";
 type Props = {
   isShowModalCreate?: boolean;
   handleCancelModalCreate?: () => void;
+  onFinish?: (value: any) => void;
 };
 export function ModalCreate(props: Props) {
-  const { isShowModalCreate, handleCancelModalCreate } = props;
+  const { isShowModalCreate, handleCancelModalCreate, onFinish } = props;
 
-  const onFinish = async (values: ICreateOrder) => {
-    const order = {
-      name: values.name,
-      amount: +values.amount,
-    };
-    const response: any = await createOrder(order);
-    if (response?.success) {
-      message.success("Create new order successful!");
-    }
-  };
-
-  //   const onFinishFailed = (errorInfo: any) => {
-  //     console.log('Failed:', errorInfo);
-  //   };
   return (
     <Modal
       title="Create new order"
@@ -36,7 +23,6 @@ export function ModalCreate(props: Props) {
         labelCol={{ span: 6 }}
         wrapperCol={{ span: 18 }}
         onFinish={onFinish}
-        // onFinishFailed={onFinishFailed}
       >
         <Form.Item
           label="Order Name"
