@@ -3,3 +3,6 @@
 
 cd order-service
 yarn lint
+
+cd ../payment-service
+yarn lint
