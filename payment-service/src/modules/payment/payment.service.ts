@@ -1,21 +1,9 @@
 import { Inject, Injectable } from '@nestjs/common';
-import {
-  ClientProxy,
-  ClientProxyFactory,
-  Transport,
-} from '@nestjs/microservices';
+import { ClientProxy } from '@nestjs/microservices';
 import { OrderStatus } from './payment.constant';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Payment, PaymentDocument } from './schema/payment.schema';
-
-// const orderClient = ClientProxyFactory.create({
-//   transport: Transport.TCP,
-//   options: {
-//     host: process.env.ORDER_HOST,
-//     port: +process.env.ORDER_PORT_MICROSERVICE,
-//   },
-// });
 @Injectable()
 export class PaymentService {
   constructor(
@@ -23,9 +11,6 @@ export class PaymentService {
     @Inject('ORDER_SERVICE')
     private readonly ordertServiceClient: ClientProxy,
   ) {}
-  // constructor(
-  //   @InjectModel(Payment.name) private paymentModel: Model<PaymentDocument>,
-  // ) {}
 
   async createOrder(order) {
     try {
@@ -35,7 +20,7 @@ export class PaymentService {
         transactionId: order.transactionId,
         status: status,
       });
-      // sleep 10 second
+      // waiting 10 second handle payment
       await new Promise((resolve) => setTimeout(resolve, 10000));
       await this.ordertServiceClient.emit('payment_processed', {
         transactionId: order.transactionId,

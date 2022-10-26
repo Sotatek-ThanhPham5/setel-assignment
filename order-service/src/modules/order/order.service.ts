@@ -1,15 +1,10 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { CreateOrderDto } from './dto/create-order.dto';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Order, OrderDocument } from './schema/order.schema';
 import { OrderStatus } from './order.constant';
 import { v4 as uuidv4 } from 'uuid';
-import {
-  ClientProxy,
-  ClientProxyFactory,
-  Transport,
-} from '@nestjs/microservices';
+import { ClientProxy } from '@nestjs/microservices';
 
 @Injectable()
 export class OrderService {
@@ -79,17 +74,17 @@ export class OrderService {
         { transactionId: orderDetail.transactionId },
         { status: orderDetail.status },
       );
-      return await this.orderModel.findOne({
-        transactionId: orderDetail.transactionId,
-      });
     } catch (error) {
       throw error;
     }
   }
 
-  async deliver(id: string) {
+  async deliverOrder() {
     try {
-      await this.orderModel.findByIdAndUpdate(id, {
+      const query = {
+        status: OrderStatus.Confirmed,
+      };
+      await this.orderModel.updateMany(query, {
         status: OrderStatus.Delivered,
       });
     } catch (error) {

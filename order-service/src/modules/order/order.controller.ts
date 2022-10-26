@@ -73,10 +73,7 @@ export class OrderController {
   @EventPattern('payment_processed')
   async handlePaymentProcessed(order) {
     try {
-      const orderUpdated = await this.orderService.updateOrder(order);
-      if (orderUpdated.status === OrderStatus.Confirmed) {
-        await this.orderService.deliver(orderUpdated._id);
-      }
+      await this.orderService.updateOrder(order);
     } catch (error) {
       throw new InternalServerErrorException(error);
     }
