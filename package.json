@@ -4,8 +4,7 @@
   "description": "Sample projects to demonstrate microservices, restful web api as well as ui. The system consists of 3 following projects: - Order Microservices - Payment Microservices - Order Web",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Test successful!\"",
-    "prepare": "husky install"
+    "test": "echo \"Test successful!\""
   },
   "repository": {
     "type": "git",
