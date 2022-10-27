@@ -6,6 +6,7 @@ import { Order, OrderSchema } from './schema/order.schema';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { DeliverOrderService } from 'src/helpers/jobs/deliver-order-job';
+import { MicroserviceConnection } from 'src/helpers/constants';
 
 @Module({
   imports: [
@@ -17,7 +18,7 @@ import { DeliverOrderService } from 'src/helpers/jobs/deliver-order-job';
     ]),
     ClientsModule.registerAsync([
       {
-        name: 'PAYMENT_SERVICE',
+        name: MicroserviceConnection.serviceName,
         imports: [ConfigModule],
         inject: [ConfigService],
         useFactory: (configService: ConfigService) => {

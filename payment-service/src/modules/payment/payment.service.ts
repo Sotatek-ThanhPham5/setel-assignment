@@ -4,11 +4,12 @@ import { OrderStatus } from './payment.constant';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Payment, PaymentDocument } from './schema/payment.schema';
+import { MicroserviceConnection } from 'src/helpers/constants';
 @Injectable()
 export class PaymentService {
   constructor(
     @InjectModel(Payment.name) private paymentModel: Model<PaymentDocument>,
-    @Inject('ORDER_SERVICE')
+    @Inject(MicroserviceConnection.serviceName)
     private readonly ordertServiceClient: ClientProxy,
   ) {}
 
@@ -21,10 +22,13 @@ export class PaymentService {
         status: status,
       });
       await new Promise((resolve) => setTimeout(resolve, 10000));
-      await this.ordertServiceClient.emit('payment_processed', {
-        transactionId: order.transactionId,
-        status: status,
-      });
+      await this.ordertServiceClient.emit(
+        MicroserviceConnection.eventName.PAYMENT_PROCESSED,
+        {
+          transactionId: order.transactionId,
+          status: status,
+        },
+      );
     } catch (error) {
       throw error;
     }

@@ -37,3 +37,12 @@ export enum HttpStatus {
   INTERNAL_SERVER_ERROR = 500,
   SERVICE_UNAVAILABLE = 503,
 }
+
+export const MicroserviceConnection = {
+  serviceName: 'PAYMENT_SERVICE',
+  eventName: {
+    PAYMENT_PROCESSED: 'payment_processed',
+    ORDER_CREATED: 'order_created',
+    CANCEL_ORDER: 'cancel_order',
+  },
+};

@@ -13,6 +13,8 @@ import { CreateOrderDto } from './dto/create-order.dto';
 import { ErrorResponse, SuccessResponse } from 'src/helpers/response';
 import { EventPattern } from '@nestjs/microservices';
 import { OrderStatus } from './order.constant';
+import { ErrorMessage } from 'src/helpers/errorMessage';
+import { MicroserviceConnection } from 'src/helpers/constants';
 
 @ApiTags('order')
 @Controller('order')
@@ -34,7 +36,7 @@ export class OrderController {
     try {
       const order = await this.orderService.find(id);
       if (!order) {
-        return new ErrorResponse(404, 'Order not found');
+        return new ErrorResponse(404, ErrorMessage.ORDER_NOT_FOUND);
       }
       return new SuccessResponse(order);
     } catch (error) {
@@ -57,10 +59,10 @@ export class OrderController {
     try {
       const order = await this.orderService.find(id);
       if (!order) {
-        return new ErrorResponse(404, 'Order not found');
+        return new ErrorResponse(404, ErrorMessage.ORDER_NOT_FOUND);
       }
       if (order.status === OrderStatus.Delivered) {
-        return new ErrorResponse(400, 'The order has been delivered');
+        return new ErrorResponse(400, ErrorMessage.ORDER_DELIVERED);
       }
       const orderCanceled = await this.orderService.cancelOrder(id);
       return new SuccessResponse(orderCanceled);
@@ -69,7 +71,7 @@ export class OrderController {
     }
   }
 
-  @EventPattern('payment_processed')
+  @EventPattern(MicroserviceConnection.eventName.PAYMENT_PROCESSED)
   async handlePaymentProcessed(order) {
     try {
       await this.orderService.updateOrder(order);

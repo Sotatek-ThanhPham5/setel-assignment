@@ -5,6 +5,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { Payment, PaymentSchema } from './schema/payment.schema';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { MicroserviceConnection } from 'src/helpers/constants';
 
 @Module({
   imports: [
@@ -16,7 +17,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
     ]),
     ClientsModule.registerAsync([
       {
-        name: 'ORDER_SERVICE',
+        name: MicroserviceConnection.serviceName,
         imports: [ConfigModule],
         inject: [ConfigService],
         useFactory: (configService: ConfigService) => {

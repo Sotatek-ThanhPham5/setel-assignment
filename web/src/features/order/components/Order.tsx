@@ -34,6 +34,13 @@ export function Order() {
     fetchOrderList();
   }, []);
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      fetchOrderList();
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
+
   const handleCancel = () => {
     setShowModalDetail(false);
   };

@@ -5,6 +5,7 @@ import { Order, OrderDocument } from './schema/order.schema';
 import { OrderStatus } from './order.constant';
 import { v4 as uuidv4 } from 'uuid';
 import { ClientProxy } from '@nestjs/microservices';
+import { MicroserviceConnection } from 'src/helpers/constants';
 
 @Injectable()
 export class OrderService {
@@ -43,7 +44,10 @@ export class OrderService {
       dto.status = OrderStatus.Created;
       dto.transactionId = uuidv4();
       const order = await this.orderModel.create(dto);
-      this.paymentServiceClient.emit('order_created', order);
+      this.paymentServiceClient.emit(
+        MicroserviceConnection.eventName.ORDER_CREATED,
+        order,
+      );
       return order;
     } catch (error) {
       throw error;
@@ -60,7 +64,7 @@ export class OrderService {
         },
       );
       await this.paymentServiceClient.emit(
-        'cancel_order',
+        MicroserviceConnection.eventName.CANCEL_ORDER,
         orderCanceled.transactionId,
       );
       return orderCanceled;

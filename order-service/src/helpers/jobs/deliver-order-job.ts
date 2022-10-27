@@ -10,6 +10,7 @@ export class DeliverOrderService {
   @Cron(CronExpression.EVERY_MINUTE)
   async handleCron() {
     try {
+      this.logger.log(`Start deliver order job at: ${new Date()}`);
       await this.orderService.deliverOrder();
     } catch (error) {
       this.logger.error('Deliver order job error', error);
