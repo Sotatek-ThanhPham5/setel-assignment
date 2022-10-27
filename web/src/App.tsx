@@ -2,7 +2,7 @@ import React from "react";
 import "./App.css";
 import { Order } from "./features/order/components/Order";
 
-function App() {
+export function App() {
   return (
     <div className="App">
       <Order />
@@ -10,4 +10,3 @@ function App() {
   );
 }
 
-export default App;

@@ -15,15 +15,15 @@ axiosInstance.interceptors.request.use(async (request: AxiosRequestConfig) => {
 
 axiosInstance.interceptors.response.use(
   (response: AxiosResponse) => {
-      const res = { ...response?.data, success: response?.data?.code === 200 };
-      return res;
+    const res = { ...response?.data, success: response?.data?.code === 200 };
+    return res;
   },
   async (error) => {
-      const res = {
-          ...error.response?.data,
-          success: error?.response?.data?.code === 200,
-      };
-      return res;
-  },
+    const res = {
+      ...error.response?.data,
+      success: error?.response?.data?.code === 200,
+    };
+    return res;
+  }
 );
-export default axiosInstance;
+export { axiosInstance };

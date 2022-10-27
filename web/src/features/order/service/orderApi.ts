@@ -1,9 +1,9 @@
-import axiosInstance from "../../../plugins/axios";
+import { axiosInstance } from "../../../plugins/axios";
 import { ICreateOrder } from "../constant/order.constant";
 
 export async function getOrderList() {
   const response = await axiosInstance.get("/order");
-  return response 
+  return response;
 }
 
 export async function getOrderDetail(id: string) {

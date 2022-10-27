@@ -19,8 +19,9 @@ const orderSlice = createSlice({
   },
 });
 export const selectedOrderList = (state: RootState) => state.order.orderList;
-export const selectedOrderDetail = (state: RootState) => state.order.orderDdetail;
+export const selectedOrderDetail = (state: RootState) =>
+  state.order.orderDdetail;
 
 export const { setOrderList, setOrderDetail } = orderSlice.actions;
 
-export default orderSlice.reducer;
+export const orderReducers = orderSlice.reducer;
