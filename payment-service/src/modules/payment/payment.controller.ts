@@ -1,11 +1,6 @@
 import { Controller, InternalServerErrorException } from '@nestjs/common';
 import { PaymentService } from './payment.service';
-import {
-  ClientProxyFactory,
-  EventPattern,
-  MessagePattern,
-  Transport,
-} from '@nestjs/microservices';
+import { EventPattern } from '@nestjs/microservices';
 
 @Controller('payment')
 export class PaymentController {

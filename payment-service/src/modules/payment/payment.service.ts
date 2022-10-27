@@ -20,7 +20,6 @@ export class PaymentService {
         transactionId: order.transactionId,
         status: status,
       });
-      // waiting 10 second handle payment
       await new Promise((resolve) => setTimeout(resolve, 10000));
       await this.ordertServiceClient.emit('payment_processed', {
         transactionId: order.transactionId,

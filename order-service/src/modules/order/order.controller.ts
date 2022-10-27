@@ -6,7 +6,6 @@ import {
   Param,
   Post,
   Put,
-  Query,
 } from '@nestjs/common';
 import { OrderService } from './order.service';
 import { ApiTags } from '@nestjs/swagger';

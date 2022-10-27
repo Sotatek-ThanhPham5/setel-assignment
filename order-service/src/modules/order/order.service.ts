@@ -31,7 +31,8 @@ export class OrderService {
 
   async find(id: string) {
     try {
-      return await this.orderModel.findById(id);
+      const order = await this.orderModel.findById(id);
+      return order;
     } catch (error) {
       throw error;
     }

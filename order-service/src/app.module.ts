@@ -1,6 +1,4 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { OrderModule } from './modules/order/order.module';
 import { MongooseModule } from '@nestjs/mongoose';
@@ -24,7 +22,7 @@ import { ScheduleModule } from '@nestjs/schedule';
     }),
     OrderModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [],
+  providers: [],
 })
 export class AppModule {}

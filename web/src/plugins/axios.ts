@@ -1,5 +1,4 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
-// require("dotenv").config();
 
 const baseUrl = process.env.REACT_APP_BASE_URL;
 const options = {
