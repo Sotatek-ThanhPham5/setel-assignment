@@ -11,7 +11,7 @@ import { MicroserviceConnection } from 'src/helpers/constants';
 export class OrderService {
   constructor(
     @InjectModel(Order.name) private orderModel: Model<OrderDocument>,
-    @Inject('PAYMENT_SERVICE')
+    @Inject(MicroserviceConnection.serviceName)
     private readonly paymentServiceClient: ClientProxy,
   ) {}
 
