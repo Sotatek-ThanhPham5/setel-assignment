@@ -25,8 +25,8 @@ import { MicroserviceConnection } from 'src/helpers/constants';
           return {
             transport: Transport.TCP,
             options: {
-              host: configService.get<string>('PAYMENT_HOST'),
-              port: +configService.get<string>('PAYMENT_PORT'),
+              host: configService.get<string>('payment.host'),
+              port: +configService.get<string>('payment.port'),
             },
           };
         },

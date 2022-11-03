@@ -14,8 +14,8 @@ async function bootstrap() {
     options: {
       retryAttempts: 5,
       retryDelay: 3000,
-      host: configService.get('ORDER_HOST'),
-      port: +configService.get('ORDER_PORT_MICROSERVICE'),
+      host: configService.get('order.host'),
+      port: +configService.get('order.portMicroservice'),
     },
   });
   await app.startAllMicroservicesAsync();
@@ -47,6 +47,6 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api-docs', app, document);
 
-  await app.listen(+configService.get('ORDER_PORT'));
+  await app.listen(+configService.get('order.port'));
 }
 bootstrap();
