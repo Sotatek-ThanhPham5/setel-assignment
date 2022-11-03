@@ -5,8 +5,8 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { Order, OrderSchema } from './schema/order.schema';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { DeliverOrderService } from 'src/helpers/jobs/deliver-order-job';
-import { MicroserviceConnection } from 'src/helpers/constants';
+import { DeliverOrderService } from '../../helpers/jobs/deliver-order-job';
+import { MicroserviceConnection } from '../../helpers/constants';
 
 @Module({
   imports: [

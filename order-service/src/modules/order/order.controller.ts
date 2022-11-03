@@ -10,11 +10,11 @@ import {
 import { OrderService } from './order.service';
 import { ApiTags } from '@nestjs/swagger';
 import { CreateOrderDto } from './dto/create-order.dto';
-import { ErrorResponse, SuccessResponse } from 'src/helpers/response';
+import { ErrorResponse, SuccessResponse } from '../../helpers/response';
 import { EventPattern } from '@nestjs/microservices';
 import { OrderStatus } from './order.constant';
-import { ErrorMessage } from 'src/helpers/errorMessage';
-import { MicroserviceConnection } from 'src/helpers/constants';
+import { ErrorMessage } from '../../helpers/errorMessage';
+import { MicroserviceConnection } from '../../helpers/constants';
 
 @ApiTags('order')
 @Controller('order')

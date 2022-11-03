@@ -5,7 +5,7 @@ import { Order, OrderDocument } from './schema/order.schema';
 import { OrderStatus } from './order.constant';
 import { v4 as uuidv4 } from 'uuid';
 import { ClientProxy } from '@nestjs/microservices';
-import { MicroserviceConnection } from 'src/helpers/constants';
+import { MicroserviceConnection } from '../../helpers/constants';
 
 @Injectable()
 export class OrderService {
