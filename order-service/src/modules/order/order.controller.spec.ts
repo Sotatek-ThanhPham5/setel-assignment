@@ -56,21 +56,32 @@ describe('OrderController', () => {
   it('controller should be defined', () => {
     expect(controller).toBeDefined();
   });
+
   it('service should be defined', () => {
     expect(service).toBeDefined();
   });
+
   it('get all order', async () => {
     const result: any = [];
     jest.spyOn(service, 'getAll').mockImplementation(() => result);
     expect(await service.getAll()).toBe(result);
   });
+
   it('create new order', async () => {
-    const result: any = {};
     const newOrder = {
       name: 'order test',
       amount: 100,
     };
-    jest.spyOn(service, 'create').mockImplementation(() => result);
-    expect(await service.create(newOrder)).toBe(result);
+    service.create = jest.fn();
+    await controller.create(newOrder);
+    expect(service.create).toBeCalled();
+  });
+
+  it('cancel order', async () => {
+    const orderId = '636391515d415be25f727466';
+
+    service.cancelOrder = jest.fn();
+    await controller.cancel(orderId);
+    expect(service.cancelOrder).not.toBeCalled();
   });
 });
