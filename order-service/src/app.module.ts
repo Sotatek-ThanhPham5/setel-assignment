@@ -3,20 +3,25 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { OrderModule } from './modules/order/order.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ScheduleModule } from '@nestjs/schedule';
+import { configuration } from './config/configuration';
 @Module({
   imports: [
     ScheduleModule.forRoot(),
     ConfigModule.forRoot({
-      envFilePath: '.env',
+      envFilePath:
+        process.env.NODE_ENV === 'production'
+          ? '.env.production'
+          : '.env.development',
       isGlobal: true,
+      load: [configuration],
     }),
     MongooseModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
       useFactory: async (configService: ConfigService) => {
         return {
-          uri: configService.get<string>('MONGO_DATABSE_CONNECTION_STRING'),
-          dbName: configService.get<string>('DATA_BASE_NAME'),
+          uri: configService.get<string>('database.stringConnection'),
+          dbName: configService.get<string>('database.name'),
         };
       },
     }),
