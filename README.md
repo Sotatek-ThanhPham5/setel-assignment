@@ -8,6 +8,9 @@ The system consists of 3 following projects:
 
 ## Running the app
 
+```bash
+
+```
 Install Docker Desktop if you do not have it. Run docker package using docker-compose command
 
 ```bash

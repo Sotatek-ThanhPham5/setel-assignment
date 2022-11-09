@@ -16,4 +16,4 @@ RUN yarn build
 EXPOSE 3001
 EXPOSE 3100
 # Run application on container
-CMD ["node", "dist/main.js"]
+CMD ["yarn", "start:prod"]
