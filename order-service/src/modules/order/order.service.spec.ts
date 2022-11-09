@@ -7,7 +7,7 @@ import { OrderController } from './order.controller';
 import { OrderService } from './order.service';
 import { Order, OrderSchema } from './schema/order.schema';
 
-describe('OrderController', () => {
+describe('OrderService', () => {
   let controller: OrderController;
   let service: OrderService;
 
@@ -55,5 +55,41 @@ describe('OrderController', () => {
 
   it('service should be defined', () => {
     expect(service).toBeDefined();
+  });
+  it('call get all order service', async () => {
+    const getAllSpy = jest.spyOn(service, 'getAll');
+    await service.getAll();
+    expect(getAllSpy).toHaveBeenCalled();
+  });
+
+  it('call get detail order service', async () => {
+    const orderId = '636391515d415be25f727466';
+    const getDetailSpy = jest.spyOn(service, 'find');
+    await service.find(orderId);
+    expect(getDetailSpy).toHaveBeenCalledWith(orderId);
+  });
+
+  it('call create order service', async () => {
+    const newOrder = {
+      name: 'order test service',
+      amount: 10000,
+    };
+    const createOrderSpy = jest.spyOn(service, 'create');
+    await service.create(newOrder);
+    expect(createOrderSpy).toHaveBeenCalledWith(newOrder);
+  });
+
+  it('call cancel order service', async () => {
+    const orderId = '636391515d415be25f727466';
+
+    const cancelOrderSpy = jest.spyOn(service, 'cancelOrder');
+    await service.cancelOrder(orderId);
+    expect(cancelOrderSpy).toHaveBeenCalledWith(orderId);
+  });
+
+  it('call deliver order service', async () => {
+    const deliverOrderSpy = jest.spyOn(service, 'deliverOrder');
+    await service.deliverOrder();
+    expect(deliverOrderSpy).toHaveBeenCalled();
   });
 });
