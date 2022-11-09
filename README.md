@@ -7,9 +7,10 @@ The system consists of 3 following projects:
 - Order Web
 
 ## Running the app
-
+Run command to copy environment variable for Payment Service and Order Web
 ```bash
-
+cp payment-service/.env.example payment-service/.env
+cp web/.env.example web/.env
 ```
 Install Docker Desktop if you do not have it. Run docker package using docker-compose command
 
