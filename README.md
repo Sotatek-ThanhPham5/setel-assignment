@@ -21,5 +21,5 @@ $ docker-compose up #--build
 
 Then browse http://localhost:3000
 
-Web Api can be checked through http://localhost:3001/api/orders and you can access api documentation through http://localhost:3001/api-docs
+Web Api can be checked through http://localhost:3001/api/order and you can access api documentation through http://localhost:3001/api-docs
 
